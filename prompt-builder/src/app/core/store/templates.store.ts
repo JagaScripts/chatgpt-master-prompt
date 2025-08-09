@@ -28,7 +28,10 @@ export class TemplatesStore {
       const tpl = this.currentTemplate();
       if (!tpl) return;
       try {
-        globalThis.localStorage?.setItem('pb_current_template', JSON.stringify(tpl));
+        globalThis.localStorage?.setItem(
+          'pb_current_template',
+          JSON.stringify(tpl),
+        );
       } catch {
         // ignore storage errors (quota/unsupported)
       }
