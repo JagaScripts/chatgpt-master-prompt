@@ -17,5 +17,3 @@ export class MarkdownService {
     return this.sanitizer.bypassSecurityTrustHtml(clean);
   }
 }
-
-
