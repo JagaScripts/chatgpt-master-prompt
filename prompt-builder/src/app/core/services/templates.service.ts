@@ -20,5 +20,3 @@ export class TemplatesService {
     else this.templates.unshift(template);
   }
 }
-
-

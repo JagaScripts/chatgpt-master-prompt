@@ -18,5 +18,3 @@ export class I18nService {
     this.translate.use(lang);
   }
 }
-
-
