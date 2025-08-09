@@ -21,6 +21,10 @@ export class SynthesisService {
       if (!section.enabled || value.length === 0) continue;
       blocks.push(`## ${section.title}\n${value}`);
     }
-    return blocks.join('\n\n');
+    const body = blocks.join('\n\n');
+    if (template.fences) {
+      return '```\n' + body + '\n```';
+    }
+    return body;
   }
 }
