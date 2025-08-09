@@ -11,8 +11,8 @@ test.describe('Prompt Builder smoke', () => {
     await page.goto('/');
     const textarea = page.locator('textarea').first();
     await textarea.fill('My goal is to write a clear prompt.');
-    await expect(page.locator('pre')).toContainText('My goal is to write a clear prompt.');
+    await expect(page.locator('pre')).toContainText(
+      'My goal is to write a clear prompt.',
+    );
   });
 });
-
-
