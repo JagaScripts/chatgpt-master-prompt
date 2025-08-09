@@ -360,11 +360,36 @@
 <div class="container my-4">
   <h1 class="mb-4">Prompt Builder</h1>
   <div class="d-flex gap-2 mb-3" role="toolbar" aria-label="Template actions">
-    <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">Copy</button>
-    <button class="btn btn-outline-secondary" (click)="onToggleFences()" aria-pressed="false">Toggle fences</button>
-    <label class="btn btn-outline-success mb-0" for="pbImport" aria-label="Import template JSON">Import</label>
-    <input id="pbImport" type="file" class="visually-hidden" accept="application/json" (change)="onImport($event)" />
-    <button class="btn btn-outline-info" (click)="onExport()" aria-label="Export template JSON">Export</button>
+    <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">
+      Copy
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      (click)="onToggleFences()"
+      aria-pressed="false"
+    >
+      Toggle fences
+    </button>
+    <label
+      class="btn btn-outline-success mb-0"
+      for="pbImport"
+      aria-label="Import template JSON"
+      >Import</label
+    >
+    <input
+      id="pbImport"
+      type="file"
+      class="visually-hidden"
+      accept="application/json"
+      (change)="onImport($event)"
+    />
+    <button
+      class="btn btn-outline-info"
+      (click)="onExport()"
+      aria-label="Export template JSON"
+    >
+      Export
+    </button>
     <span class="ms-auto text-muted" aria-live="polite">{{ status }}</span>
   </div>
   <div class="row">
