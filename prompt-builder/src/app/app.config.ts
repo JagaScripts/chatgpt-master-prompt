@@ -21,7 +21,8 @@ export const appConfig: ApplicationConfig = {
       defaultLanguage: 'en',
       loader: {
         provide: TranslateHttpLoader,
-        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, 'assets/i18n/', '.json'),
+        useFactory: (http: HttpClient) =>
+          new TranslateHttpLoader(http, 'assets/i18n/', '.json'),
         deps: [HttpClient],
       },
     }),
