@@ -1,0 +1,14 @@
+{
+  "name": "chatgpt-master-prompt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "npm run lint:eslint && npm run lint:html",
+    "lint:eslint": "eslint . --ext .ts,.js,.cjs --max-warnings=0",
+    "lint:html": "eslint . --ext .html --max-warnings=0",
+    "format": "npx prettier --write \"**/*.{ts,js,html,scss,md,json,cjs}\"",
+    "test:quick": "echo \"(placeholder)\""
+  }
+}
+
+

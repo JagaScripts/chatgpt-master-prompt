@@ -9,5 +9,9 @@ tmp/
 .cache/
 .vite/
 **/*.min.js
+.eslintrc.cjs
+setup_eslint_tsdoc.sh
+package-lock.json
+package.json
 
 
