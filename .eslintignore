@@ -1,3 +1,4 @@
+# Using flat config's `ignores` in eslint.config.js; keep file for tooling compatibility
 dist/
 node_modules/
 coverage/
@@ -9,7 +10,6 @@ tmp/
 .cache/
 .vite/
 **/*.min.js
-.eslintrc.cjs
 setup_eslint_tsdoc.sh
 package-lock.json
 package.json
