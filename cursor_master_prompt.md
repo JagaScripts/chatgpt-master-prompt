@@ -168,6 +168,42 @@ export interface PromptTemplate {
 6. Build & run:
    - `npm run start`
 
+
+## Commenting & Docs (MUST)
+- Use **TSDoc/JSDoc** style comments for _all_ exported entities and public members:
+  - Components, services, models, utilities, functions, classes, interfaces, enums.
+  - Public methods (Angular lifecycle hooks included).
+  - Inputs/Outputs in Angular components must be documented with `@Input`/`@Output` description lines.
+- For private helpers, add a brief TSDoc if the intent isn't obvious; otherwise a single-line comment is acceptable.
+- Place a **file header** at the top of each new file:
+  ```ts
+  /**
+   * @fileoverview <short purpose of the file>
+   * @module <path alias if any>
+   * @remarks Part of Prompt Builder MVP.
+   */
+  ```
+- Standard TSDoc block:
+  ```ts
+  /**
+   * @summary <1-line summary>
+   * @description <2–4 lines explaining what and why; not how>
+   * @param foo - <meaning and units/format>
+   * @returns <what is returned; empty if void>
+   * @throws <conditions> (when applicable)
+   * @example
+   * // short usage
+   * const x = doThing("bar");
+   * @public
+   */
+  ```
+- Prefer `@remarks` for extra context, `@defaultValue` for configs, `@see` for links (issue IDs, specs).
+- **Inline comments**: add above non-trivial logic branches (regex, token math, focus management). Avoid repeating what the code says—explain intent or constraints.
+- **Templates (HTML)**: use short `<!-- keyboard: ... -->` comments only when necessary.
+- Enforce docs with **eslint-plugin-tsdoc**; the CI/lint step should fail on invalid TSDoc.
+- Cursor must **backfill TSDoc** when creating or modifying code. If missing information, insert a `TODO(tsdoc):` line and continue.
+
+
 ## Non-Goals (MVP)
 - No API calls to OpenAI.
 - No authentication.
