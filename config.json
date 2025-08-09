@@ -5,10 +5,7 @@
     "frontend": {
       "framework": "Angular",
       "version": "18.x",
-      "styles": [
-        "Bootstrap 5.x",
-        "SCSS"
-      ],
+      "styles": ["Bootstrap 5.x", "SCSS"],
       "i18n": "@ngx-translate/core",
       "pwa": true,
       "packages": [
@@ -55,23 +52,10 @@
       "followUp",
       "metadata"
     ],
-    "copy": [
-      "plain",
-      "withCodeFences"
-    ],
-    "export": [
-      "md",
-      "json",
-      "txt"
-    ],
-    "persistence": [
-      "localStorage",
-      "indexedDB"
-    ],
-    "i18n": [
-      "en",
-      "es"
-    ],
+    "copy": ["plain", "withCodeFences"],
+    "export": ["md", "json", "txt"],
+    "persistence": ["localStorage", "indexedDB"],
+    "i18n": ["en", "es"],
     "offline": true,
     "accessibility": {
       "waiAria": true,
@@ -125,13 +109,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "key",
-        "title",
-        "enabled",
-        "value",
-        "order"
-      ]
+      "required": ["key", "title", "enabled", "value", "order"]
     },
     "PromptTemplate": {
       "type": "object",
@@ -159,17 +137,11 @@
         },
         "locale": {
           "type": "string",
-          "enum": [
-            "en",
-            "es"
-          ]
+          "enum": ["en", "es"]
         },
         "mode": {
           "type": "string",
-          "enum": [
-            "concise",
-            "verbose"
-          ]
+          "enum": ["concise", "verbose"]
         },
         "fences": {
           "type": "boolean"
@@ -204,15 +176,7 @@
     "commitPolicy": {
       "frequency": "meaningful",
       "messageFormat": "type(scope): summary",
-      "types": [
-        "feat",
-        "fix",
-        "chore",
-        "docs",
-        "refactor",
-        "test",
-        "style"
-      ]
+      "types": ["feat", "fix", "chore", "docs", "refactor", "test", "style"]
     }
   },
   "git": {
@@ -233,11 +197,7 @@
       "messageTemplate": "{type}({scope}): {summary}"
     },
     "hooks": {
-      "preCommit": [
-        "npm run format",
-        "npm run lint",
-        "npm run test:quick"
-      ],
+      "preCommit": ["npm run format", "npm run lint", "npm run test:quick"],
       "commitMsg": "regex:^((feat|fix|docs|style|refactor|test|chore))(\\([\\w-]+\\))?: .{1,100}$"
     },
     "scopeMap": {
