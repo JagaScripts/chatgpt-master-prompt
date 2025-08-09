@@ -1,4 +1,6 @@
 import { Component, HostListener, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { RouterOutlet } from '@angular/router';
 import { SectionsListComponent } from './features/sections/sections-list.component';
 import { PreviewPaneComponent } from './features/preview/preview-pane.component';
@@ -12,6 +14,8 @@ import { SynthesisService } from './core/services/synthesis.service';
   selector: 'app-root',
   standalone: true,
   imports: [
+    NgIf,
+    TranslateModule,
     RouterOutlet,
     SectionsListComponent,
     PreviewPaneComponent,
