@@ -5,15 +5,18 @@ Prompt Builder (Angular 18 + Bootstrap) — offline-first, keyboard-driven app t
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js >= 20
 - npm
 
 ### Install toolchain (repo root)
+
 ```bash
 npm install
 ```
 
 ### Run the web app
+
 ```bash
 cd prompt-builder
 npm install
@@ -23,30 +26,35 @@ npm start
 ```
 
 ### Lint & Format (repo root)
+
 ```bash
 npm run format
 npm run lint
 ```
 
 ### e2e Smoke (optional)
+
 ```bash
 cd prompt-builder
 npm run e2e
 ```
 
 ## Keyboard Shortcuts
+
 - Ctrl+Shift+C: Copy prompt
 - Ctrl+Shift+P: Toggle copy with code fences
 - Ctrl+Alt+Up/Down: Reorder last-edited section
 - ?: Toggle help overlay
 
 ## Git Workflow
+
 - GitHub Flow, feature branches, squash merge to main
 - Conventional Commits enforced by commit-msg hook
 - Always pull before push on main:
   - `git pull --rebase origin main` then `git push origin main`
 
 ## Notable Features
+
 - Live markdown preview (sanitized)
 - i18n EN/ES via ngx-translate
 - Sections editor with reorder buttons and shortcuts
@@ -55,4 +63,5 @@ npm run e2e
 - LocalStorage autosave, template Save/Load
 
 ## License
+
 MIT
