@@ -1,4 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
+import { NgIf, NgFor } from '@angular/common';
 import { TemplatesStore } from '../../core/store/templates.store';
 
 /**
@@ -7,6 +8,7 @@ import { TemplatesStore } from '../../core/store/templates.store';
 @Component({
   selector: 'app-lint-panel',
   standalone: true,
+  imports: [NgIf, NgFor],
   template: `
     <div class="card mb-3">
       <div class="card-header">Lint</div>
