@@ -137,6 +137,10 @@
 - Use **Conventional Commits** with path-derived scope.
 - When component is done, **direct squash merge** into `main`.
 
+### 17.2 Pull-before-push policy (main)
+- Always `git pull --rebase origin main` on `main` before any `git push`.
+- If divergence errors occur, prefer rebase (`git config --local pull.rebase true`).
+
 ## 17.1 Shell Policy (zsh)
 - Primary shell: **zsh**. All automation and commands should be compatible with zsh.
 - Prefer non-interactive flags to avoid prompts (e.g., `--yes`, `--skip-install=false`).

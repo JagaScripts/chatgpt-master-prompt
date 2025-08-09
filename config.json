@@ -198,6 +198,10 @@
       ],
       "messageTemplate": "{type}({scope}): {summary}"
     },
+    "policies": {
+      "pullBeforePushOnMain": true,
+      "pullStrategy": "rebase"
+    },
     "hooks": {
       "preCommit": ["npm run format", "npm run lint", "npm run test:quick"],
       "commitMsg": "regex:^((feat|fix|docs|style|refactor|test|chore))(\\([\\w-]+\\))?: .{1,100}$"

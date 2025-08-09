@@ -40,3 +40,6 @@ export NPM_CONFIG_FUND=false
 
 - Keep hooks non-interactive (format, lint, quick test); fail-fast, do not prompt.
 - Use squash merges to keep `main` green.
+- Always pull before push on `main`:
+  - `git pull --rebase origin main` then `git push origin main`
+  - Configure once per repo: `git config --local pull.rebase true`
