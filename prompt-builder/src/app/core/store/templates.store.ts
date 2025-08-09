@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
 import {
   PromptSection,
   PromptSectionKey,
@@ -22,9 +22,28 @@ export class TemplatesStore {
     return this.templatesSignal().find((t) => t.id === id) ?? null;
   });
 
+  constructor() {
+    // Autosave current template to LocalStorage when it changes
+    effect(() => {
+      const tpl = this.currentTemplate();
+      if (!tpl) return;
+      try {
+        globalThis.localStorage?.setItem('pb_current_template', JSON.stringify(tpl));
+      } catch {
+        // ignore storage errors (quota/unsupported)
+      }
+    });
+  }
+
   /** Initialize the store with a default template when empty. */
   initializeDefaultTemplate(): void {
     if (this.templatesSignal().length > 0) return;
+    const restored = this.loadFromLocalStorage();
+    if (restored) {
+      this.templatesSignal.set([restored]);
+      this.currentTemplateIdSignal.set(restored.id);
+      return;
+    }
     const now = new Date().toISOString();
     const sections: PromptSection[] = this.createDefaultSections();
     const template: PromptTemplate = {
@@ -129,5 +148,17 @@ export class TemplatesStore {
       metadata: 'Metadata',
     };
     return map[key];
+  }
+
+  private loadFromLocalStorage(): PromptTemplate | null {
+    try {
+      const raw = globalThis.localStorage?.getItem('pb_current_template');
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as PromptTemplate;
+      if (!parsed || !parsed.id || !Array.isArray(parsed.sections)) return null;
+      return parsed;
+    } catch {
+      return null;
+    }
   }
 }
