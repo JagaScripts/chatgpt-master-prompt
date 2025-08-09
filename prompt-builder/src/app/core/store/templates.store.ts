@@ -44,15 +44,34 @@ export class TemplatesStore {
         // ignore storage errors (quota/unsupported)
       }
     });
+
+    // Persist templates array whenever it changes
+    effect(() => {
+      const arr = this.templatesSignal();
+      try {
+        globalThis.localStorage?.setItem('pb_templates', JSON.stringify(arr));
+      } catch {
+        // ignore storage errors
+      }
+    });
   }
 
   /** Initialize the store with a default template when empty. */
   initializeDefaultTemplate(): void {
     if (this.templatesSignal().length > 0) return;
-    const restored = this.loadFromLocalStorage();
-    if (restored) {
-      this.templatesSignal.set([restored]);
-      this.currentTemplateIdSignal.set(restored.id);
+    // Attempt to restore full templates array first
+    const restoredList = this.loadTemplatesArray();
+    const restoredCurrent = this.loadFromLocalStorage();
+    if (restoredList && restoredList.length > 0) {
+      this.templatesSignal.set(restoredList);
+      const id = restoredCurrent?.id ?? restoredList[0].id;
+      this.currentTemplateIdSignal.set(id);
+      return;
+    }
+    // Fallback legacy: only current template stored
+    if (restoredCurrent) {
+      this.templatesSignal.set([restoredCurrent]);
+      this.currentTemplateIdSignal.set(restoredCurrent.id);
       return;
     }
     const now = new Date().toISOString();
@@ -211,6 +230,39 @@ export class TemplatesStore {
     return this.titleForKey(key);
   }
 
+  /** Create a copy of current template with a new name and id, and select it. */
+  saveAs(name: string): void {
+    const src = this.currentTemplate();
+    if (!src) return;
+    const copy: PromptTemplate = {
+      ...src,
+      id: crypto.randomUUID(),
+      name: name?.trim() || 'Untitled',
+      updatedAt: new Date().toISOString(),
+    };
+    this.templatesSignal.update((arr) => [copy, ...arr]);
+    this.currentTemplateIdSignal.set(copy.id);
+  }
+
+  /** Switch current template by id. */
+  switchTo(id: string): void {
+    if (!id) return;
+    const exists = this.templatesSignal().some((t) => t.id === id);
+    if (!exists) return;
+    this.currentTemplateIdSignal.set(id);
+  }
+
+  /** Delete template by id; if current, switch to the first available or create default. */
+  deleteTemplate(id: string): void {
+    const currentId = this.currentTemplateIdSignal();
+    this.templatesSignal.update((arr) => arr.filter((t) => t.id !== id));
+    if (currentId === id) {
+      const next = this.templatesSignal()[0];
+      if (next) this.currentTemplateIdSignal.set(next.id);
+      else this.initializeDefaultTemplate();
+    }
+  }
+
   private loadFromLocalStorage(): PromptTemplate | null {
     try {
       const raw = globalThis.localStorage?.getItem('pb_current_template');
@@ -218,6 +270,18 @@ export class TemplatesStore {
       const parsed = JSON.parse(raw) as PromptTemplate;
       if (!parsed || !parsed.id || !Array.isArray(parsed.sections)) return null;
       return parsed;
+    } catch {
+      return null;
+    }
+  }
+
+  private loadTemplatesArray(): PromptTemplate[] | null {
+    try {
+      const raw = globalThis.localStorage?.getItem('pb_templates');
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as PromptTemplate[];
+      if (!Array.isArray(parsed)) return null;
+      return parsed.filter((t) => t && t.id && Array.isArray(t.sections));
     } catch {
       return null;
     }

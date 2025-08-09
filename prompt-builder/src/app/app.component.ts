@@ -132,4 +132,23 @@ export class AppComponent {
     this.reorderAnnouncement = `${title} moved ${delta < 0 ? 'up' : 'down'}`;
     setTimeout(() => (this.reorderAnnouncement = ''), 1000);
   }
+
+  onSwitchTemplate(evt: Event): void {
+    const select = evt.target as HTMLSelectElement;
+    this.store.switchTo(select.value);
+    this.status = 'Switched';
+  }
+
+  onSaveAs(name: string): void {
+    if (!name?.trim()) return;
+    this.store.saveAs(name.trim());
+    this.status = 'Saved';
+  }
+
+  onDeleteCurrent(): void {
+    const id = this.store.currentTemplate()?.id;
+    if (!id) return;
+    this.store.deleteTemplate(id);
+    this.status = 'Deleted';
+  }
 }
