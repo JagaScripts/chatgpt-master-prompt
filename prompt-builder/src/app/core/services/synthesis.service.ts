@@ -24,5 +24,3 @@ export class SynthesisService {
     return blocks.join('\n\n');
   }
 }
-
-

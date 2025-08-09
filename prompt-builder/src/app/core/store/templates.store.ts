@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
 import {
   PromptSection,
   PromptSectionKey,
@@ -12,6 +12,9 @@ import {
 export class TemplatesStore {
   private readonly templatesSignal = signal<PromptTemplate[]>([]);
   private readonly currentTemplateIdSignal = signal<string | null>(null);
+  private readonly lastEditedSectionKeySignal = signal<PromptSectionKey | null>(
+    null,
+  );
 
   /** All templates. */
   readonly templates = computed(() => this.templatesSignal());
@@ -22,9 +25,31 @@ export class TemplatesStore {
     return this.templatesSignal().find((t) => t.id === id) ?? null;
   });
 
+  constructor() {
+    // Autosave current template to LocalStorage when it changes
+    effect(() => {
+      const tpl = this.currentTemplate();
+      if (!tpl) return;
+      try {
+        globalThis.localStorage?.setItem(
+          'pb_current_template',
+          JSON.stringify(tpl),
+        );
+      } catch {
+        // ignore storage errors (quota/unsupported)
+      }
+    });
+  }
+
   /** Initialize the store with a default template when empty. */
   initializeDefaultTemplate(): void {
     if (this.templatesSignal().length > 0) return;
+    const restored = this.loadFromLocalStorage();
+    if (restored) {
+      this.templatesSignal.set([restored]);
+      this.currentTemplateIdSignal.set(restored.id);
+      return;
+    }
     const now = new Date().toISOString();
     const sections: PromptSection[] = this.createDefaultSections();
     const template: PromptTemplate = {
@@ -58,6 +83,44 @@ export class TemplatesStore {
         s.key === key ? { ...s, value } : s,
       );
       return tpl;
+    });
+    this.markEdited(key);
+  }
+
+  /** Mark a section key as last edited (for keyboard reordering context). */
+  markEdited(key: PromptSectionKey): void {
+    this.lastEditedSectionKeySignal.set(key);
+  }
+
+  /** Toggle the fences flag (copy/export with code fences). */
+  toggleFences(): void {
+    this.updateCurrent((tpl) => ({ ...tpl, fences: !tpl.fences }));
+  }
+
+  /** Move last-edited section (or provided key) one position up. */
+  moveSectionUp(key?: PromptSectionKey): void {
+    this.moveSection(key ?? this.lastEditedSectionKeySignal(), -1);
+  }
+
+  /** Move last-edited section (or provided key) one position down. */
+  moveSectionDown(key?: PromptSectionKey): void {
+    this.moveSection(key ?? this.lastEditedSectionKeySignal(), +1);
+  }
+
+  private moveSection(key: PromptSectionKey | null, delta: -1 | 1): void {
+    if (!key) return;
+    this.updateCurrent((tpl) => {
+      const sections = [...tpl.sections].sort((a, b) => a.order - b.order);
+      const index = sections.findIndex((s) => s.key === key);
+      if (index < 0) return tpl;
+      const target = index + delta;
+      if (target < 0 || target >= sections.length) return tpl;
+      const a = sections[index];
+      const b = sections[target];
+      const tmp = a.order;
+      a.order = b.order;
+      b.order = tmp;
+      return { ...tpl, sections };
     });
   }
 
@@ -129,5 +192,17 @@ export class TemplatesStore {
       metadata: 'Metadata',
     };
     return map[key];
+  }
+
+  private loadFromLocalStorage(): PromptTemplate | null {
+    try {
+      const raw = globalThis.localStorage?.getItem('pb_current_template');
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as PromptTemplate;
+      if (!parsed || !parsed.id || !Array.isArray(parsed.sections)) return null;
+      return parsed;
+    } catch {
+      return null;
+    }
   }
 }
