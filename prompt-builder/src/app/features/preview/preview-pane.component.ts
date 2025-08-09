@@ -20,5 +20,3 @@ export class PreviewPaneComponent {
   /** Markdown content to render. */
   @Input() content = '';
 }
-
-
