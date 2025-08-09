@@ -1,181 +1,284 @@
 {
-    "projectName": "prompt-builder",
-    "description": "Offline-first, keyboard-centric OpenAI-style Prompt Builder (Angular 18 + Bootstrap), with strong a11y, i18n (EN/ES), local persistence, token estimator, and prompt linting.",
-    "stack": {
-      "frontend": {
-        "framework": "Angular",
-        "version": "18.x",
-        "styles": ["Bootstrap 5.x", "SCSS"],
-        "i18n": "@ngx-translate/core",
-        "pwa": true,
-        "packages": [
-          "bootstrap",
-          "@ngx-translate/core",
-          "@ngx-translate/http-loader",
-          "idb",
-          "marked",
-          "dompurify"
-        ]
-      },
-      "backend": {
-        "enabled": false,
-        "language": "Java 21",
-        "framework": "Spring Boot 3.x",
-        "notes": "Optional scaffold only for future server-side persistence; not used in MVP."
-      }
-    },
-    "runtime": {
-      "node": ">=20",
-      "java": "21",
-      "os": "Ubuntu 24.04 (WSL)",
-      "browserSupport": "Chromium/Firefox latest"
-    },
-    "features": {
-      "models": "OpenAI-style prompts ONLY",
-      "sections": [
-        "context",
-        "role",
-        "goal",
-        "audience",
-        "input",
-        "outputFormat",
-        "constraints",
-        "process",
-        "validation",
-        "styleTone",
-        "toolsApis",
-        "tokenBudget",
-        "language",
-        "determinism",
-        "dosDonts",
-        "followUp",
-        "metadata"
+  "projectName": "prompt-builder",
+  "description": "Offline-first, keyboard-centric OpenAI-style Prompt Builder (Angular 18 + Bootstrap), with strong a11y, i18n (EN/ES), local persistence, token estimator, and prompt linting.",
+  "stack": {
+    "frontend": {
+      "framework": "Angular",
+      "version": "18.x",
+      "styles": [
+        "Bootstrap 5.x",
+        "SCSS"
       ],
-      "copy": ["plain", "withCodeFences"],
-      "export": ["md", "json", "txt"],
-      "persistence": ["localStorage", "indexedDB"],
-      "i18n": ["en", "es"],
-      "offline": true,
-      "accessibility": {
-        "waiAria": true,
-        "visibleFocus": true,
-        "skipLinks": true,
-        "highContrastTheme": true
-      },
-      "keyboardShortcuts": {
-        "copy": "Ctrl+Shift+C",
-        "toggleFences": "Ctrl+Shift+P",
-        "reorderUp": "Ctrl+Alt+ArrowUp",
-        "reorderDown": "Ctrl+Alt+ArrowDown",
-        "saveTemplate": "Ctrl+Shift+S",
-        "focusSections": "Alt+1",
-        "focusPreview": "Alt+2",
-        "openLint": "Alt+3",
-        "help": "?"
-      },
-      "lintRules": [
-        "goalRequiredMin10",
-        "outputFormatRequired",
-        "conflictingConstraints",
-        "roleMissingWithStyleTone",
-        "languageMismatchWarning"
-      ],
-      "tokenEstimator": {
-        "method": "approxCharsDiv4",
-        "notes": "Estimated tokens = ceil(characters / 4). Approximation only."
-      }
+      "i18n": "@ngx-translate/core",
+      "pwa": true,
+      "packages": [
+        "bootstrap",
+        "@ngx-translate/core",
+        "@ngx-translate/http-loader",
+        "idb",
+        "marked",
+        "dompurify",
+        "eslint-plugin-tsdoc"
+      ]
     },
-    "schema": {
-      "PromptSection": {
-        "type": "object",
-        "properties": {
-          "key": { "type": "string" },
-          "title": { "type": "string" },
-          "enabled": { "type": "boolean" },
-          "value": { "type": "string" },
-          "required": { "type": "boolean" },
-          "order": { "type": "number" }
-        },
-        "required": ["key", "title", "enabled", "value", "order"]
-      },
-      "PromptTemplate": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "name": { "type": "string" },
-          "sections": {
-            "type": "array",
-            "items": { "$ref": "#/schema/PromptSection" }
-          },
-          "updatedAt": { "type": "string" },
-          "tags": { "type": "array", "items": { "type": "string" } },
-          "locale": { "type": "string", "enum": ["en", "es"] },
-          "mode": { "type": "string", "enum": ["concise", "verbose"] },
-          "fences": { "type": "boolean" }
-        },
-        "required": ["id", "name", "sections", "updatedAt", "locale", "mode", "fences"]
-      }
-    },
-    "cursor": {
-      "autoRunAllowList": [
-        "corepack",
-        "npm",
-        "npx",
-        "ng",
-        "node",
-        "git",
-        "mkdir",
-        "touch",
-        "cp",
-        "mv",
-        "sed",
-        "bash"
-      ],
-      "commitPolicy": {
-        "frequency": "meaningful",
-        "messageFormat": "type(scope): summary",
-        "types": ["feat", "fix", "chore", "docs", "refactor", "test", "style"]
-      }
-    },
-    "git": {
-      "model": "github-flow",
-      "commitConvention": "conventional-commits",
-      "branching": {
-        "patternNew": "feat/component/<kebab-name>",
-        "patternFix": "fix/component/<kebab-name>",
-        "merge": "squash-to-main"
-      },
-      "autoCommit": {
-        "mode": "meaningful",
-        "rules": [
-          "format-and-lint-before-commit",
-          "derive-scope-from-path",
-          "commit-on-meaningful-change"
-        ],
-        "messageTemplate": "{type}({scope}): {summary}"
-      },
-      "hooks": {
-        "preCommit": ["npm run format", "npm run lint", "npm run test:quick"],
-        "commitMsg": "regex:^((feat|fix|docs|style|refactor|test|chore))(\\([\\w-]+\\))?: .{1,100}$"
-      },
-      "scopeMap": {
-        "src/app/features/sections/": "sections",
-        "src/app/features/preview/": "preview",
-        "src/app/core/services/": "services",
-        "src/app/core/models/": "models",
-        "src/assets/i18n/": "i18n"
-      }
-    },
-    "nonGoals": [
-      "No model API calls",
-      "No user accounts",
-      "No server-side storage in MVP"
-    ],
-    "quality": {
-      "tsStrict": true,
-      "eslint": true,
-      "prettier": true,
-      "e2e": "Playwright basic flows"
+    "backend": {
+      "enabled": false,
+      "language": "Java 21",
+      "framework": "Spring Boot 3.x",
+      "notes": "Optional scaffold only for future server-side persistence; not used in MVP."
     }
+  },
+  "runtime": {
+    "node": ">=20",
+    "java": "21",
+    "os": "Ubuntu 24.04 (WSL)",
+    "browserSupport": "Chromium/Firefox latest"
+  },
+  "features": {
+    "models": "OpenAI-style prompts ONLY",
+    "sections": [
+      "context",
+      "role",
+      "goal",
+      "audience",
+      "input",
+      "outputFormat",
+      "constraints",
+      "process",
+      "validation",
+      "styleTone",
+      "toolsApis",
+      "tokenBudget",
+      "language",
+      "determinism",
+      "dosDonts",
+      "followUp",
+      "metadata"
+    ],
+    "copy": [
+      "plain",
+      "withCodeFences"
+    ],
+    "export": [
+      "md",
+      "json",
+      "txt"
+    ],
+    "persistence": [
+      "localStorage",
+      "indexedDB"
+    ],
+    "i18n": [
+      "en",
+      "es"
+    ],
+    "offline": true,
+    "accessibility": {
+      "waiAria": true,
+      "visibleFocus": true,
+      "skipLinks": true,
+      "highContrastTheme": true
+    },
+    "keyboardShortcuts": {
+      "copy": "Ctrl+Shift+C",
+      "toggleFences": "Ctrl+Shift+P",
+      "reorderUp": "Ctrl+Alt+ArrowUp",
+      "reorderDown": "Ctrl+Alt+ArrowDown",
+      "saveTemplate": "Ctrl+Shift+S",
+      "focusSections": "Alt+1",
+      "focusPreview": "Alt+2",
+      "openLint": "Alt+3",
+      "help": "?"
+    },
+    "lintRules": [
+      "goalRequiredMin10",
+      "outputFormatRequired",
+      "conflictingConstraints",
+      "roleMissingWithStyleTone",
+      "languageMismatchWarning"
+    ],
+    "tokenEstimator": {
+      "method": "approxCharsDiv4",
+      "notes": "Estimated tokens = ceil(characters / 4). Approximation only."
+    }
+  },
+  "schema": {
+    "PromptSection": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "order": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "key",
+        "title",
+        "enabled",
+        "value",
+        "order"
+      ]
+    },
+    "PromptTemplate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/schema/PromptSection"
+          }
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "type": "string",
+          "enum": [
+            "en",
+            "es"
+          ]
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "concise",
+            "verbose"
+          ]
+        },
+        "fences": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "sections",
+        "updatedAt",
+        "locale",
+        "mode",
+        "fences"
+      ]
+    }
+  },
+  "cursor": {
+    "autoRunAllowList": [
+      "corepack",
+      "npm",
+      "npx",
+      "ng",
+      "node",
+      "git",
+      "mkdir",
+      "touch",
+      "cp",
+      "mv",
+      "sed",
+      "bash"
+    ],
+    "commitPolicy": {
+      "frequency": "meaningful",
+      "messageFormat": "type(scope): summary",
+      "types": [
+        "feat",
+        "fix",
+        "chore",
+        "docs",
+        "refactor",
+        "test",
+        "style"
+      ]
+    }
+  },
+  "git": {
+    "model": "github-flow",
+    "commitConvention": "conventional-commits",
+    "branching": {
+      "patternNew": "feat/component/<kebab-name>",
+      "patternFix": "fix/component/<kebab-name>",
+      "merge": "squash-to-main"
+    },
+    "autoCommit": {
+      "mode": "meaningful",
+      "rules": [
+        "format-and-lint-before-commit",
+        "derive-scope-from-path",
+        "commit-on-meaningful-change"
+      ],
+      "messageTemplate": "{type}({scope}): {summary}"
+    },
+    "hooks": {
+      "preCommit": [
+        "npm run format",
+        "npm run lint",
+        "npm run test:quick"
+      ],
+      "commitMsg": "regex:^((feat|fix|docs|style|refactor|test|chore))(\\([\\w-]+\\))?: .{1,100}$"
+    },
+    "scopeMap": {
+      "src/app/features/sections/": "sections",
+      "src/app/features/preview/": "preview",
+      "src/app/core/services/": "services",
+      "src/app/core/models/": "models",
+      "src/assets/i18n/": "i18n"
+    }
+  },
+  "comments": {
+    "style": "tsdoc",
+    "fileHeaders": true,
+    "requireFor": [
+      "components",
+      "services",
+      "models",
+      "utilities",
+      "functions",
+      "classes",
+      "interfaces",
+      "enums",
+      "publicMethods"
+    ],
+    "privateRecommended": true,
+    "enforceWith": "eslint-plugin-tsdoc",
+    "failOnError": true,
+    "examples": {
+      "function": "/**\\n * @summary Does X\\n * @param foo - meaning\\n * @returns Y\\n */",
+      "file": "/**\\n * @fileoverview Purpose\\n * @module path\\n * @remarks Part of Prompt Builder MVP.\\n */"
+    }
+  },
+  "nonGoals": [
+    "No model API calls",
+    "No user accounts",
+    "No server-side storage in MVP"
+  ],
+  "quality": {
+    "tsStrict": true,
+    "eslint": true,
+    "prettier": true,
+    "e2e": "Playwright basic flows"
   }
-  
+}
