@@ -1,0 +1,13 @@
+dist/
+node_modules/
+coverage/
+build/
+out/
+.git/
+.husky/
+tmp/
+.cache/
+.vite/
+**/*.min.js
+
+
