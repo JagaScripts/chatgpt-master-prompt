@@ -24,5 +24,16 @@
       "openHelp": "? — Toggle help overlay"
     },
     "close": "Close"
+  },
+  "status": {
+    "copied": "Copied",
+    "copyFailed": "Copy failed",
+    "fencesToggled": "Fences toggled",
+    "exported": "Exported",
+    "imported": "Imported",
+    "importFailed": "Import failed",
+    "switched": "Switched",
+    "saved": "Saved",
+    "deleted": "Deleted"
   }
 }
