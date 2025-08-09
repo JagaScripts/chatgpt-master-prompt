@@ -1,4 +1,6 @@
 import { Component, HostListener, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { RouterOutlet } from '@angular/router';
 import { SectionsListComponent } from './features/sections/sections-list.component';
 import { PreviewPaneComponent } from './features/preview/preview-pane.component';
@@ -12,6 +14,8 @@ import { SynthesisService } from './core/services/synthesis.service';
   selector: 'app-root',
   standalone: true,
   imports: [
+    NgIf,
+    TranslateModule,
     RouterOutlet,
     SectionsListComponent,
     PreviewPaneComponent,
@@ -24,6 +28,7 @@ import { SynthesisService } from './core/services/synthesis.service';
 export class AppComponent {
   title = 'prompt-builder';
   status = '';
+  showHelp = false;
 
   private readonly store = inject(TemplatesStore);
   private readonly clipboard = inject(ClipboardService);
@@ -59,6 +64,12 @@ export class AppComponent {
     if (ctrl && alt && event.key === 'ArrowDown') {
       event.preventDefault();
       this.store.moveSectionDown();
+      return;
+    }
+    // ? to toggle help overlay
+    if (event.key === '?') {
+      event.preventDefault();
+      this.toggleHelp();
       return;
     }
   }
@@ -105,5 +116,9 @@ export class AppComponent {
     };
     reader.readAsText(file);
     input.value = '';
+  }
+
+  toggleHelp(): void {
+    this.showHelp = !this.showHelp;
   }
 }

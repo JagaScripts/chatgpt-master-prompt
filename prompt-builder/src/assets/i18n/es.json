@@ -1,5 +1,23 @@
 {
   "app": { "title": "Constructor de Prompts" },
   "sections": { "title": "Secciones" },
-  "preview": { "title": "Vista previa" }
+  "preview": { "title": "Vista previa" },
+  "toolbar": {
+    "copy": "Copiar",
+    "toggleFences": "Alternar comillas",
+    "import": "Importar",
+    "export": "Exportar",
+    "help": "Ayuda"
+  },
+  "help": {
+    "title": "Atajos de teclado",
+    "shortcuts": {
+      "copy": "Ctrl+Shift+C — Copiar prompt",
+      "toggleFences": "Ctrl+Shift+P — Alternar copia con comillas",
+      "reorderUp": "Ctrl+Alt+Arriba — Subir sección editada",
+      "reorderDown": "Ctrl+Alt+Abajo — Bajar sección editada",
+      "openHelp": "? — Alternar ayuda"
+    },
+    "close": "Cerrar"
+  }
 }
