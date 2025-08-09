@@ -3,6 +3,7 @@
 This project is optimized for non-interactive execution in zsh to avoid editor "Skip" prompts.
 
 ## Shell: zsh
+
 - Primary shell: zsh
 - Disable history expansion to avoid `!` issues:
   - Temporary (current session): `setopt NO_BANG_HIST`
@@ -15,7 +16,9 @@ This project is optimized for non-interactive execution in zsh to avoid editor "
   ```
 
 ## Environment for non-interactive runs
+
 Export these to reduce prompts and paging:
+
 ```bash
 export PAGER=cat
 export GIT_PAGER=cat
@@ -25,6 +28,7 @@ export NPM_CONFIG_FUND=false
 ```
 
 ## Command patterns
+
 - Append `| cat` to long outputs to avoid pagers.
 - Use background jobs for long pipelines:
   ```bash
@@ -33,7 +37,6 @@ export NPM_CONFIG_FUND=false
 - Prefer non-interactive flags: `--yes`, `--defaults`, `--interactive=false`, `--skip-confirmation`.
 
 ## Git & Hooks
+
 - Keep hooks non-interactive (format, lint, quick test); fail-fast, do not prompt.
 - Use squash merges to keep `main` green.
-
-
