@@ -10,7 +10,10 @@ import { TemplatesStore } from '../../core/store/templates.store';
   template: `
     <div class="card mb-3">
       <div class="card-header">Lint</div>
-      <ul class="list-group list-group-flush" *ngIf="issues().length; else clean">
+      <ul
+        class="list-group list-group-flush"
+        *ngIf="issues().length; else clean"
+      >
         <li class="list-group-item" *ngFor="let i of issues()">{{ i }}</li>
       </ul>
       <ng-template #clean>
@@ -38,5 +41,3 @@ export class LintPanelComponent {
     return problems;
   });
 }
-
-

@@ -14,9 +14,18 @@ import { SynthesisService } from '../../core/services/synthesis.service';
       <div class="card-header">Stats</div>
       <div class="card-body">
         <div class="row text-center">
-          <div class="col-4"><strong>{{ chars() }}</strong><div class="text-muted small">chars</div></div>
-          <div class="col-4"><strong>{{ words() }}</strong><div class="text-muted small">words</div></div>
-          <div class="col-4"><strong>{{ tokens() }}</strong><div class="text-muted small">tokens (≈)</div></div>
+          <div class="col-4">
+            <strong>{{ chars() }}</strong>
+            <div class="text-muted small">chars</div>
+          </div>
+          <div class="col-4">
+            <strong>{{ words() }}</strong>
+            <div class="text-muted small">words</div>
+          </div>
+          <div class="col-4">
+            <strong>{{ tokens() }}</strong>
+            <div class="text-muted small">tokens (≈)</div>
+          </div>
         </div>
       </div>
     </div>
@@ -35,5 +44,3 @@ export class StatsPanelComponent {
   readonly words = computed(() => this.estimator.countWords(this.text()));
   readonly tokens = computed(() => this.estimator.estimateTokens(this.text()));
 }
-
-
