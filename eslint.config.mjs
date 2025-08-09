@@ -9,16 +9,29 @@ export default [
   // Ignore patterns (replaces .eslintignore)
   {
     ignores: [
+      // Top-level and nested build/output directories
       'dist/**',
-      'node_modules/**',
+      '**/dist/**',
       'coverage/**',
+      '**/coverage/**',
       'build/**',
+      '**/build/**',
       'out/**',
+      '**/out/**',
+      // All node_modules, including nested package workspaces
+      'node_modules/**',
+      '**/node_modules/**',
+      // Angular/CLI caches and temp folders
+      '.angular/**',
+      '**/.angular/**',
+      '.cache/**',
+      '**/.cache/**',
       '.git/**',
       '.husky/**',
       'tmp/**',
-      '.cache/**',
+      '**/tmp/**',
       '.vite/**',
+      '**/.vite/**',
       '**/*.min.js',
       'setup_eslint_tsdoc.sh',
       'package-lock.json',
