@@ -13,6 +13,7 @@ import { SynthesisService } from '../../core/services/synthesis.service';
     <div class="card mb-3">
       <div class="card-header">Preview</div>
       <div class="card-body">
+
         <pre class="mb-0">{{ markdown() || 'Nothing to preview yet.' }}</pre>
       </div>
     </div>
