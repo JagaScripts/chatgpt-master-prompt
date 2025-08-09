@@ -66,6 +66,13 @@ export class TemplatesStore {
     this.currentTemplateIdSignal.set(template.id);
   }
 
+  /** Replace current template with the provided one (e.g., after Load). */
+  loadTemplate(template: PromptTemplate): void {
+    if (!template || !template.id || !Array.isArray(template.sections)) return;
+    this.templatesSignal.set([template]);
+    this.currentTemplateIdSignal.set(template.id);
+  }
+
   /** Update a section's enabled flag. */
   setSectionEnabled(key: PromptSectionKey, enabled: boolean): void {
     this.updateCurrent((tpl) => {
