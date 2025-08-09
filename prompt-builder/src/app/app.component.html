@@ -360,6 +360,24 @@
 <div class="container my-4">
   <h1 class="mb-4">{{ "app.title" | translate }}</h1>
   <div class="d-flex gap-2 mb-3" role="toolbar" aria-label="Template actions">
+    <div class="input-group input-group-sm w-auto">
+      <select
+        class="form-select"
+        (change)="onSwitchTemplate($event)"
+        aria-label="Select template"
+      >
+        <option
+          *ngFor="let t of store.templates()"
+          [value]="t.id"
+          [selected]="store.currentTemplate()?.id === t.id"
+        >
+          {{ t.name }}
+        </option>
+      </select>
+      <input type="text" class="form-control" placeholder="Save as…" #tplName />
+      <button class="btn btn-outline-primary" (click)="onSaveAs(tplName.value); tplName.value=''">Save</button>
+      <button class="btn btn-outline-danger" (click)="onDeleteCurrent()">Delete</button>
+    </div>
     <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">
       {{ "toolbar.copy" | translate }}
     </button>
