@@ -1,5 +1,5 @@
 import { Component, HostListener, inject } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterOutlet } from '@angular/router';
 import { SectionsListComponent } from './features/sections/sections-list.component';
@@ -15,6 +15,7 @@ import { SynthesisService } from './core/services/synthesis.service';
   standalone: true,
   imports: [
     NgIf,
+    NgFor,
     TranslateModule,
     RouterOutlet,
     SectionsListComponent,
@@ -31,7 +32,7 @@ export class AppComponent {
   showHelp = false;
   reorderAnnouncement = '';
 
-  private readonly store = inject(TemplatesStore);
+  readonly store = inject(TemplatesStore);
   private readonly clipboard = inject(ClipboardService);
   private readonly synth = inject(SynthesisService);
 
