@@ -48,14 +48,16 @@ export class AppComponent {
       event.preventDefault();
       const text = this.synth.synthesizeMarkdown(this.store.currentTemplate());
       const ok = await this.clipboard.copy(text);
-      this.status = ok ? 'Copied' : 'Copy failed';
+      this.status = ok
+        ? this.translate.instant('status.copied')
+        : this.translate.instant('status.copyFailed');
       return;
     }
     // Ctrl+Shift+P: toggle fences
     if (ctrl && shift && (event.key === 'P' || event.key === 'p')) {
       event.preventDefault();
       this.store.toggleFences();
-      this.status = 'Fences toggled';
+      this.status = this.translate.instant('status.fencesToggled');
       return;
     }
     // Ctrl+Alt+Up/Down: reorder last-edited section
@@ -82,12 +84,14 @@ export class AppComponent {
   async onCopy(): Promise<void> {
     const text = this.synth.synthesizeMarkdown(this.store.currentTemplate());
     const ok = await this.clipboard.copy(text);
-    this.status = ok ? 'Copied' : 'Copy failed';
+    this.status = ok
+      ? this.translate.instant('status.copied')
+      : this.translate.instant('status.copyFailed');
   }
 
   onToggleFences(): void {
     this.store.toggleFences();
-    this.status = 'Fences toggled';
+    this.status = this.translate.instant('status.fencesToggled');
   }
 
   onExport(): void {
@@ -102,7 +106,7 @@ export class AppComponent {
     a.download = `${tpl.name || 'template'}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    this.status = 'Exported';
+    this.status = this.translate.instant('status.exported');
   }
 
   onImport(evt: Event): void {
@@ -114,9 +118,9 @@ export class AppComponent {
       try {
         const parsed = JSON.parse(String(reader.result));
         this.store.loadTemplate(parsed);
-        this.status = 'Imported';
+        this.status = this.translate.instant('status.imported');
       } catch {
-        this.status = 'Import failed';
+        this.status = this.translate.instant('status.importFailed');
       }
     };
     reader.readAsText(file);
@@ -138,13 +142,13 @@ export class AppComponent {
   onSwitchTemplate(evt: Event): void {
     const select = evt.target as HTMLSelectElement;
     this.store.switchTo(select.value);
-    this.status = 'Switched';
+    this.status = this.translate.instant('status.switched');
   }
 
   onSaveAs(name: string): void {
     if (!name?.trim()) return;
     this.store.saveAs(name.trim());
-    this.status = 'Saved';
+    this.status = this.translate.instant('status.saved');
   }
 
   onDeleteCurrent(): void {
@@ -153,6 +157,6 @@ export class AppComponent {
     const msg = this.translate.instant('toolbar.confirmDelete');
     if (!window.confirm(msg || 'Delete current template?')) return;
     this.store.deleteTemplate(id);
-    this.status = 'Deleted';
+    this.status = this.translate.instant('status.deleted');
   }
 }

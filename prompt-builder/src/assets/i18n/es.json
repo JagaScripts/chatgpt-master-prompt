@@ -24,5 +24,16 @@
       "openHelp": "? — Alternar ayuda"
     },
     "close": "Cerrar"
+  },
+  "status": {
+    "copied": "Copiado",
+    "copyFailed": "Error al copiar",
+    "fencesToggled": "Comillas alternadas",
+    "exported": "Exportado",
+    "imported": "Importado",
+    "importFailed": "Error al importar",
+    "switched": "Cambiado",
+    "saved": "Guardado",
+    "deleted": "Eliminado"
   }
 }
