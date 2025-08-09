@@ -21,23 +21,40 @@ import { TemplatesStore } from '../../core/store/templates.store';
     <div class="card mb-3">
       <div class="card-header">{{ panelTitle }}</div>
       <div class="card-body" *ngIf="store.currentTemplate(); else loading">
-        <div
-          *ngFor="let s of store.currentTemplate()!.sections"
-          class="form-check mb-2"
-        >
-          <input
-            type="checkbox"
-            class="form-check-input"
-            [id]="'sec-' + s.key"
-            [checked]="s.enabled"
-            (change)="toggle(s.key, !!$any($event.target)?.checked)"
-          />
-          <label class="form-check-label" [for]="'sec-' + s.key"
-            >{{ s.title }}
-            <span *ngIf="s.required" class="text-danger">*</span></label
-          >
+        <div *ngFor="let s of store.currentTemplate()!.sections" class="mb-3">
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [id]="'sec-' + s.key"
+              [checked]="s.enabled"
+              (change)="toggle(s.key, !!$any($event.target)?.checked)"
+            />
+            <label class="form-check-label" [for]="'sec-' + s.key">
+              {{ s.title }}
+              <span *ngIf="s.required" class="text-danger">*</span>
+            </label>
+            <div class="ms-auto btn-group btn-group-sm" role="group">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="moveUp(s.key)"
+                [attr.aria-label]="'Move ' + s.title + ' up'"
+              >
+                ↑
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="moveDown(s.key)"
+                [attr.aria-label]="'Move ' + s.title + ' down'"
+              >
+                ↓
+              </button>
+            </div>
+          </div>
           <textarea
-            class="form-control mt-2"
+            class="form-control"
             rows="3"
             [value]="s.value"
             (input)="onEdit(s.key, $any($event.target).value)"
@@ -69,5 +86,13 @@ export class SectionsListComponent implements OnInit {
 
   onEdit(key: string, value: string): void {
     this.store.setSectionValue(key as any, value);
+  }
+
+  moveUp(key: string): void {
+    this.store.moveSectionUp(key as any);
+  }
+
+  moveDown(key: string): void {
+    this.store.moveSectionDown(key as any);
   }
 }
