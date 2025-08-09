@@ -25,6 +25,11 @@ export class TemplatesStore {
     return this.templatesSignal().find((t) => t.id === id) ?? null;
   });
 
+  /** Last edited section key (for announcements / reordering context). */
+  readonly lastEditedKey = computed<PromptSectionKey | null>(() =>
+    this.lastEditedSectionKeySignal(),
+  );
+
   constructor() {
     // Autosave current template to LocalStorage when it changes
     effect(() => {
@@ -199,6 +204,11 @@ export class TemplatesStore {
       metadata: 'Metadata',
     };
     return map[key];
+  }
+
+  /** Public helper to map a section key to its display title. */
+  getSectionTitle(key: PromptSectionKey): string {
+    return this.titleForKey(key);
   }
 
   private loadFromLocalStorage(): PromptTemplate | null {
