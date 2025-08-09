@@ -375,8 +375,15 @@
         </option>
       </select>
       <input type="text" class="form-control" placeholder="Save as…" #tplName />
-      <button class="btn btn-outline-primary" (click)="onSaveAs(tplName.value); tplName.value=''">Save</button>
-      <button class="btn btn-outline-danger" (click)="onDeleteCurrent()">Delete</button>
+      <button
+        class="btn btn-outline-primary"
+        (click)="onSaveAs(tplName.value); tplName.value = ''"
+      >
+        Save
+      </button>
+      <button class="btn btn-outline-danger" (click)="onDeleteCurrent()">
+        Delete
+      </button>
     </div>
     <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">
       {{ "toolbar.copy" | translate }}
