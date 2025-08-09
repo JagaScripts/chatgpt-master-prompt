@@ -1,5 +1,23 @@
 {
   "app": { "title": "Prompt Builder" },
   "sections": { "title": "Sections" },
-  "preview": { "title": "Preview" }
+  "preview": { "title": "Preview" },
+  "toolbar": {
+    "copy": "Copy",
+    "toggleFences": "Toggle fences",
+    "import": "Import",
+    "export": "Export",
+    "help": "Help"
+  },
+  "help": {
+    "title": "Keyboard Shortcuts",
+    "shortcuts": {
+      "copy": "Ctrl+Shift+C — Copy prompt",
+      "toggleFences": "Ctrl+Shift+P — Toggle copy with code fences",
+      "reorderUp": "Ctrl+Alt+Up — Move last-edited section up",
+      "reorderDown": "Ctrl+Alt+Down — Move last-edited section down",
+      "openHelp": "? — Toggle help overlay"
+    },
+    "close": "Close"
+  }
 }

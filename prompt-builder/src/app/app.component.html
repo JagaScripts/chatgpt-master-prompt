@@ -358,23 +358,23 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <div class="container my-4">
-  <h1 class="mb-4">Prompt Builder</h1>
+  <h1 class="mb-4">{{ 'app.title' | translate }}</h1>
   <div class="d-flex gap-2 mb-3" role="toolbar" aria-label="Template actions">
     <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">
-      Copy
+      {{ 'toolbar.copy' | translate }}
     </button>
     <button
       class="btn btn-outline-secondary"
       (click)="onToggleFences()"
       aria-pressed="false"
     >
-      Toggle fences
+      {{ 'toolbar.toggleFences' | translate }}
     </button>
     <label
       class="btn btn-outline-success mb-0"
       for="pbImport"
       aria-label="Import template JSON"
-      >Import</label
+      >{{ 'toolbar.import' | translate }}</label
     >
     <input
       id="pbImport"
@@ -388,7 +388,14 @@
       (click)="onExport()"
       aria-label="Export template JSON"
     >
-      Export
+      {{ 'toolbar.export' | translate }}
+    </button>
+    <button
+      class="btn btn-outline-dark"
+      (click)="toggleHelp()"
+      aria-expanded="false"
+    >
+      {{ 'toolbar.help' | translate }}
     </button>
     <span class="ms-auto text-muted" aria-live="polite">{{ status }}</span>
   </div>
@@ -403,4 +410,34 @@
     </div>
   </div>
   <router-outlet />
+</div>
+
+<div
+  class="modal fade show"
+  tabindex="-1"
+  role="dialog"
+  aria-modal="true"
+  style="display: {{ showHelp ? 'block' : 'none' }}; background: rgba(0,0,0,0.5)"
+  *ngIf="showHelp"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'help.title' | translate }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="toggleHelp()"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled mb-0">
+          <li>{{ 'help.shortcuts.copy' | translate }}</li>
+          <li>{{ 'help.shortcuts.toggleFences' | translate }}</li>
+          <li>{{ 'help.shortcuts.reorderUp' | translate }}</li>
+          <li>{{ 'help.shortcuts.reorderDown' | translate }}</li>
+          <li>{{ 'help.shortcuts.openHelp' | translate }}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="toggleHelp()">{{ 'help.close' | translate }}</button>
+      </div>
+    </div>
+  </div>
 </div>

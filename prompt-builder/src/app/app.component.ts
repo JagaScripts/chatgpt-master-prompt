@@ -24,6 +24,7 @@ import { SynthesisService } from './core/services/synthesis.service';
 export class AppComponent {
   title = 'prompt-builder';
   status = '';
+  showHelp = false;
 
   private readonly store = inject(TemplatesStore);
   private readonly clipboard = inject(ClipboardService);
@@ -59,6 +60,12 @@ export class AppComponent {
     if (ctrl && alt && event.key === 'ArrowDown') {
       event.preventDefault();
       this.store.moveSectionDown();
+      return;
+    }
+    // ? to toggle help overlay
+    if (event.key === '?') {
+      event.preventDefault();
+      this.toggleHelp();
       return;
     }
   }
@@ -105,5 +112,9 @@ export class AppComponent {
     };
     reader.readAsText(file);
     input.value = '';
+  }
+
+  toggleHelp(): void {
+    this.showHelp = !this.showHelp;
   }
 }
