@@ -64,4 +64,4 @@ npm run e2e
 
 ## License
 
-MIT
+Apache-2.0 license
