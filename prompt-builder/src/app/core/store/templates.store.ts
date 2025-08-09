@@ -12,7 +12,9 @@ import {
 export class TemplatesStore {
   private readonly templatesSignal = signal<PromptTemplate[]>([]);
   private readonly currentTemplateIdSignal = signal<string | null>(null);
-  private readonly lastEditedSectionKeySignal = signal<PromptSectionKey | null>(null);
+  private readonly lastEditedSectionKeySignal = signal<PromptSectionKey | null>(
+    null,
+  );
 
   /** All templates. */
   readonly templates = computed(() => this.templatesSignal());
