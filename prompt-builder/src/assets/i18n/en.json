@@ -7,7 +7,12 @@
     "toggleFences": "Toggle fences",
     "import": "Import",
     "export": "Export",
-    "help": "Help"
+    "help": "Help",
+    "selectTemplate": "Select template",
+    "save": "Save",
+    "saveAsPlaceholder": "Save as…",
+    "delete": "Delete",
+    "confirmDelete": "Delete current template?"
   },
   "help": {
     "title": "Keyboard Shortcuts",

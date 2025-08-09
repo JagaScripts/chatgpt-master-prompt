@@ -1,6 +1,6 @@
 import { Component, HostListener, inject } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterOutlet } from '@angular/router';
 import { SectionsListComponent } from './features/sections/sections-list.component';
 import { PreviewPaneComponent } from './features/preview/preview-pane.component';
@@ -35,6 +35,7 @@ export class AppComponent {
   readonly store = inject(TemplatesStore);
   private readonly clipboard = inject(ClipboardService);
   private readonly synth = inject(SynthesisService);
+  private readonly translate = inject(TranslateService);
 
   @HostListener('document:keydown', ['$event'])
   async onKeydown(event: KeyboardEvent): Promise<void> {
@@ -149,6 +150,8 @@ export class AppComponent {
   onDeleteCurrent(): void {
     const id = this.store.currentTemplate()?.id;
     if (!id) return;
+    const msg = this.translate.instant('toolbar.confirmDelete');
+    if (!window.confirm(msg || 'Delete current template?')) return;
     this.store.deleteTemplate(id);
     this.status = 'Deleted';
   }

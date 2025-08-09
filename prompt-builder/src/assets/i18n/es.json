@@ -7,7 +7,12 @@
     "toggleFences": "Alternar comillas",
     "import": "Importar",
     "export": "Exportar",
-    "help": "Ayuda"
+    "help": "Ayuda",
+    "selectTemplate": "Seleccionar plantilla",
+    "save": "Guardar",
+    "saveAsPlaceholder": "Guardar como…",
+    "delete": "Eliminar",
+    "confirmDelete": "¿Eliminar la plantilla actual?"
   },
   "help": {
     "title": "Atajos de teclado",
