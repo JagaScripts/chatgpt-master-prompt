@@ -29,6 +29,7 @@ export class AppComponent {
   title = 'prompt-builder';
   status = '';
   showHelp = false;
+  reorderAnnouncement = '';
 
   private readonly store = inject(TemplatesStore);
   private readonly clipboard = inject(ClipboardService);
@@ -59,11 +60,13 @@ export class AppComponent {
     if (ctrl && alt && event.key === 'ArrowUp') {
       event.preventDefault();
       this.store.moveSectionUp();
+      this.announceReorder(-1);
       return;
     }
     if (ctrl && alt && event.key === 'ArrowDown') {
       event.preventDefault();
       this.store.moveSectionDown();
+      this.announceReorder(+1);
       return;
     }
     // ? to toggle help overlay
@@ -120,5 +123,13 @@ export class AppComponent {
 
   toggleHelp(): void {
     this.showHelp = !this.showHelp;
+  }
+
+  private announceReorder(delta: -1 | 1): void {
+    const key = this.store.lastEditedKey();
+    if (!key) return;
+    const title = this.store.getSectionTitle(key);
+    this.reorderAnnouncement = `${title} moved ${delta < 0 ? 'up' : 'down'}`;
+    setTimeout(() => (this.reorderAnnouncement = ''), 1000);
   }
 }
