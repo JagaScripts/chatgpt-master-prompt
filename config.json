@@ -29,6 +29,7 @@
     "node": ">=20",
     "java": "21",
     "os": "Ubuntu 24.04 (WSL)",
+    "shell": "zsh",
     "browserSupport": "Chromium/Firefox latest"
   },
   "features": {
@@ -171,7 +172,8 @@
       "cp",
       "mv",
       "sed",
-      "bash"
+      "bash",
+      "zsh"
     ],
     "commitPolicy": {
       "frequency": "meaningful",
