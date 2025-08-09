@@ -12,6 +12,9 @@ import {
 export class TemplatesStore {
   private readonly templatesSignal = signal<PromptTemplate[]>([]);
   private readonly currentTemplateIdSignal = signal<string | null>(null);
+  private readonly lastEditedSectionKeySignal = signal<PromptSectionKey | null>(
+    null,
+  );
 
   /** All templates. */
   readonly templates = computed(() => this.templatesSignal());
@@ -80,6 +83,44 @@ export class TemplatesStore {
         s.key === key ? { ...s, value } : s,
       );
       return tpl;
+    });
+    this.markEdited(key);
+  }
+
+  /** Mark a section key as last edited (for keyboard reordering context). */
+  markEdited(key: PromptSectionKey): void {
+    this.lastEditedSectionKeySignal.set(key);
+  }
+
+  /** Toggle the fences flag (copy/export with code fences). */
+  toggleFences(): void {
+    this.updateCurrent((tpl) => ({ ...tpl, fences: !tpl.fences }));
+  }
+
+  /** Move last-edited section (or provided key) one position up. */
+  moveSectionUp(key?: PromptSectionKey): void {
+    this.moveSection(key ?? this.lastEditedSectionKeySignal(), -1);
+  }
+
+  /** Move last-edited section (or provided key) one position down. */
+  moveSectionDown(key?: PromptSectionKey): void {
+    this.moveSection(key ?? this.lastEditedSectionKeySignal(), +1);
+  }
+
+  private moveSection(key: PromptSectionKey | null, delta: -1 | 1): void {
+    if (!key) return;
+    this.updateCurrent((tpl) => {
+      const sections = [...tpl.sections].sort((a, b) => a.order - b.order);
+      const index = sections.findIndex((s) => s.key === key);
+      if (index < 0) return tpl;
+      const target = index + delta;
+      if (target < 0 || target >= sections.length) return tpl;
+      const a = sections[index];
+      const b = sections[target];
+      const tmp = a.order;
+      a.order = b.order;
+      b.order = tmp;
+      return { ...tpl, sections };
     });
   }
 
