@@ -23,6 +23,8 @@ export default [
       'setup_eslint_tsdoc.sh',
       'package-lock.json',
       'package.json',
+      // Temporary ignore during Angular scaffold
+      'prompt-builder/**',
     ],
   },
 
