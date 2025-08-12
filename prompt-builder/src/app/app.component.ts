@@ -1,5 +1,5 @@
 import { Component, HostListener, inject } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf, NgFor, NgStyle } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterOutlet } from '@angular/router';
 import { SectionsListComponent } from './features/sections/sections-list.component';
@@ -16,6 +16,7 @@ import { SynthesisService } from './core/services/synthesis.service';
   imports: [
     NgIf,
     NgFor,
+    NgStyle,
     TranslateModule,
     RouterOutlet,
     SectionsListComponent,
@@ -159,7 +160,7 @@ export class AppComponent {
   onDeleteCurrent(): void {
     const id = this.store.currentTemplate()?.id;
     if (!id) return;
-    const msg = this.translate.instant('toolbar.confirmDelete');
+    const msg = this.translate.instant('confirmDelete');
     if (!window.confirm(msg || 'Delete current template?')) return;
     this.store.deleteTemplate(id);
     this.status = this.translate.instant('status.deleted');
