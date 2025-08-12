@@ -41,7 +41,10 @@ import { TemplatesStore } from '../../core/store/templates.store';
                 (click)="moveUp(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' up'"
               >
-                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                <span
+                  class="glyphicon glyphicon-chevron-up"
+                  aria-hidden="true"
+                ></span>
               </button>
               <button
                 type="button"
@@ -49,7 +52,10 @@ import { TemplatesStore } from '../../core/store/templates.store';
                 (click)="moveDown(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' down'"
               >
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                <span
+                  class="glyphicon glyphicon-chevron-down"
+                  aria-hidden="true"
+                ></span>
               </button>
             </div>
           </div>
