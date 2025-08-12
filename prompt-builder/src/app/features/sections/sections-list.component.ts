@@ -40,22 +40,18 @@ import { TemplatesStore } from '../../core/store/templates.store';
                 class="btn btn-outline-secondary"
                 (click)="moveUp(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' up'"
+                title="Move up"
               >
-                <span
-                  class="glyphicon glyphicon-chevron-up"
-                  aria-hidden="true"
-                ></span>
+                <i class="bi bi-chevron-up" aria-hidden="true"></i>
               </button>
               <button
                 type="button"
                 class="btn btn-outline-secondary"
                 (click)="moveDown(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' down'"
+                title="Move down"
               >
-                <span
-                  class="glyphicon glyphicon-chevron-down"
-                  aria-hidden="true"
-                ></span>
+                <i class="bi bi-chevron-down" aria-hidden="true"></i>
               </button>
             </div>
           </div>

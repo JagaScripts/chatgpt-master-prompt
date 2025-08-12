@@ -5,16 +5,23 @@
 }
 
 .selector-row .input-group {
-  flex: 1 1 auto;
-}
-
-.toolbar-row > *:not(span[aria-live]) {
-  flex: 0 0 auto;
+  flex: 1 1 100%;
 }
 
 .toolbar-row {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+.toolbar-row > * {
+  flex: 1 1 auto;
+}
+
+.toolbar-row > label.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Minimal glyphicon chevron fallback using CSS-only arrows */
