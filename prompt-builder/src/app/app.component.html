@@ -356,7 +356,10 @@
   tabindex="-1"
   role="dialog"
   aria-modal="true"
-  [ngStyle]="{ display: showHelp ? 'block' : 'none', background: 'rgba(0,0,0,0.5)' }"
+  [ngStyle]="{
+    display: showHelp ? 'block' : 'none',
+    background: 'rgba(0,0,0,0.5)',
+  }"
   *ngIf="showHelp"
 >
   <div class="modal-dialog modal-dialog-centered">
