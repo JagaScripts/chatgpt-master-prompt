@@ -37,21 +37,39 @@ import { TemplatesStore } from '../../core/store/templates.store';
             <div class="ms-auto btn-group btn-group-sm" role="group">
               <button
                 type="button"
-                class="btn btn-outline-secondary"
+                class="btn btn-outline-secondary p-1"
                 (click)="moveUp(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' up'"
                 title="Move up"
               >
-                <i class="bi bi-chevron-up" aria-hidden="true"></i>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M7 14l5-5 5 5H7z" />
+                </svg>
               </button>
               <button
                 type="button"
-                class="btn btn-outline-secondary"
+                class="btn btn-outline-secondary p-1"
                 (click)="moveDown(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' down'"
                 title="Move down"
               >
-                <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M7 10l5 5 5-5H7z" />
+                </svg>
               </button>
             </div>
           </div>
