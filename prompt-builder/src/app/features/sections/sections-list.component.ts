@@ -42,8 +42,15 @@ import { TemplatesStore } from '../../core/store/templates.store';
                 [attr.aria-label]="'Move ' + s.title + ' up'"
                 title="Move up"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M7 14l5-5 5 5H7z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M7 14l5-5 5 5H7z" />
                 </svg>
               </button>
               <button
@@ -53,8 +60,15 @@ import { TemplatesStore } from '../../core/store/templates.store';
                 [attr.aria-label]="'Move ' + s.title + ' down'"
                 title="Move down"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M7 10l5 5 5-5H7z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M7 10l5 5 5-5H7z" />
                 </svg>
               </button>
             </div>
