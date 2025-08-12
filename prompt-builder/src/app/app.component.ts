@@ -94,6 +94,11 @@ export class AppComponent {
     this.status = this.translate.instant('status.fencesToggled');
   }
 
+  onClearAll(): void {
+    this.store.clearAllValues();
+    this.status = this.translate.instant('status.cleared');
+  }
+
   onExport(): void {
     const tpl = this.store.currentTemplate();
     if (!tpl) return;

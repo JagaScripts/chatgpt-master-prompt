@@ -7,6 +7,7 @@
     "toggleFences": "Toggle fences",
     "import": "Import",
     "export": "Export",
+    "clear": "Clear",
     "help": "Help",
     "selectTemplate": "Select template",
     "save": "Save",
@@ -35,5 +36,7 @@
     "switched": "Switched",
     "saved": "Saved",
     "deleted": "Deleted"
+  ,
+    "cleared": "Cleared"
   }
 }
