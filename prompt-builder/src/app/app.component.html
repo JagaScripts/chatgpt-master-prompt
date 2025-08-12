@@ -254,8 +254,9 @@
 
 <div class="container my-4">
   <h1 class="mb-4">{{ "app.title" | translate }}</h1>
-  <div class="d-flex gap-2 mb-3" role="toolbar" aria-label="Template actions">
-    <div class="input-group input-group-sm w-auto">
+  <!-- Row 1: selector + name input + save + delete -->
+  <div class="d-flex gap-2 mb-2 align-items-stretch" role="group" aria-label="Template selection and actions">
+    <div class="input-group input-group-sm w-auto" style="min-width: 420px">
       <select
         class="form-select"
         (change)="onSwitchTemplate($event)"
@@ -269,57 +270,21 @@
           {{ t.name }}
         </option>
       </select>
-      <input type="text" class="form-control" placeholder="Save as…" #tplName />
-      <button
-        class="btn btn-outline-primary"
-        (click)="onSaveAs(tplName.value); tplName.value = ''"
-      >
-        Save
-      </button>
-      <button class="btn btn-outline-danger" (click)="onDeleteCurrent()">
-        Delete
-      </button>
+      <input type="text" class="form-control" placeholder="{{ 'saveAsPlaceholder' | translate }}" #tplName />
+      <button class="btn btn-outline-primary" (click)="onSaveAs(tplName.value); tplName.value = ''">{{ 'save' | translate }}</button>
+      <button class="btn btn-outline-danger" (click)="onDeleteCurrent()">{{ 'delete' | translate }}</button>
     </div>
-    <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">
-      {{ "toolbar.copy" | translate }}
-    </button>
-    <button
-      class="btn btn-outline-secondary"
-      (click)="onToggleFences()"
-      aria-pressed="false"
-    >
-      {{ "toolbar.toggleFences" | translate }}
-    </button>
-    <button class="btn btn-outline-warning" (click)="onClearAll()">
-      {{ "toolbar.clear" | translate }}
-    </button>
-    <label
-      class="btn btn-outline-success mb-0"
-      for="pbImport"
-      aria-label="Import template JSON"
-      >{{ "toolbar.import" | translate }}</label
-    >
-    <input
-      id="pbImport"
-      type="file"
-      class="visually-hidden"
-      accept="application/json"
-      (change)="onImport($event)"
-    />
-    <button
-      class="btn btn-outline-info"
-      (click)="onExport()"
-      aria-label="Export template JSON"
-    >
-      {{ "toolbar.export" | translate }}
-    </button>
-    <button
-      class="btn btn-outline-dark"
-      (click)="toggleHelp()"
-      aria-expanded="false"
-    >
-      {{ "toolbar.help" | translate }}
-    </button>
+  </div>
+
+  <!-- Row 2: main toolbar -->
+  <div class="d-flex gap-2 mb-3 align-items-center" role="toolbar" aria-label="Toolbar">
+    <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">{{ 'copy' | translate }}</button>
+    <button class="btn btn-outline-secondary" (click)="onToggleFences()" aria-pressed="false">{{ 'toggleFences' | translate }}</button>
+    <button class="btn btn-outline-warning" (click)="onClearAll()">{{ 'clear' | translate }}</button>
+    <label class="btn btn-outline-success mb-0" for="pbImport" aria-label="Import template JSON">{{ 'import' | translate }}</label>
+    <input id="pbImport" type="file" class="visually-hidden" accept="application/json" (change)="onImport($event)" />
+    <button class="btn btn-outline-info" (click)="onExport()" aria-label="Export template JSON">{{ 'export' | translate }}</button>
+    <button class="btn btn-outline-dark" (click)="toggleHelp()" aria-expanded="false">{{ 'help' | translate }}</button>
     <span class="ms-auto text-muted" aria-live="polite">{{ status }}</span>
   </div>
   <div class="row">
