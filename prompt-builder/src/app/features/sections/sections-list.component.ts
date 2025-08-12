@@ -34,10 +34,10 @@ import { TemplatesStore } from '../../core/store/templates.store';
               {{ s.title }}
               <span *ngIf="s.required" class="text-danger">*</span>
             </label>
-            <div class="ms-auto btn-group btn-group-sm" role="group">
+            <div class="ms-auto gap-1 btn-group btn-group-sm" role="group">
               <button
                 type="button"
-                class="btn btn-outline-secondary p-1"
+                class="btn btn-primary p-1"
                 (click)="moveUp(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' up'"
                 title="Move up"
@@ -55,7 +55,7 @@ import { TemplatesStore } from '../../core/store/templates.store';
               </button>
               <button
                 type="button"
-                class="btn btn-outline-secondary p-1"
+                class="btn btn-primary p-1"
                 (click)="moveDown(s.key)"
                 [attr.aria-label]="'Move ' + s.title + ' down'"
                 title="Move down"
