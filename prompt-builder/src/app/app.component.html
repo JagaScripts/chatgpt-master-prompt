@@ -253,7 +253,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <div class="container my-4">
-  <h1 class="mb-4">{{ "app.title" | translate }}</h1>
+  <h1 class="mb-4">{{ "Prompt Builder" | translate }}</h1>
   <!-- Row 1: selector + name input + save + delete -->
   <div
     class="d-flex gap-2 mb-2 align-items-stretch selector-row"
@@ -281,38 +281,38 @@
         #tplName
       />
       <button
-        class="btn btn-outline-primary"
+        class="btn btn-primary"
         (click)="onSaveAs(tplName.value); tplName.value = ''"
       >
-        {{ "save" | translate }}
+        {{ "Save" | translate }}
       </button>
-      <button class="btn btn-outline-danger" (click)="onDeleteCurrent()">
-        {{ "delete" | translate }}
+      <button class="btn btn-danger" (click)="onDeleteCurrent()">
+        {{ "Delete" | translate }}
       </button>
     </div>
   </div>
 
   <!-- Row 2: main toolbar -->
   <div
-    class="d-flex gap-2 mb-3 align-items-center toolbar-row"
+    class="d-flex gap-2 mb-3 align-items-stretch toolbar-row"
     role="toolbar"
     aria-label="Toolbar"
   >
     <button class="btn btn-primary" (click)="onCopy()" aria-label="Copy prompt">
-      {{ "copy" | translate }}
+      {{ "Copy" | translate }}
     </button>
     <button
-      class="btn btn-outline-secondary"
+      class="btn btn-secondary"
       (click)="onToggleFences()"
       aria-pressed="false"
     >
-      {{ "toggleFences" | translate }}
+      {{ "Toggle Fences" | translate }}
     </button>
-    <button class="btn btn-outline-warning" (click)="onClearAll()">
-      {{ "clear" | translate }}
+    <button class="btn btn-warning" (click)="onClearAll()">
+      {{ "Clear" | translate }}
     </button>
     <label
-      class="btn btn-outline-success mb-0"
+      class="btn btn-success mb-0"
       for="pbImport"
       aria-label="Import template JSON"
       >{{ "import" | translate }}</label
@@ -325,20 +325,19 @@
       (change)="onImport($event)"
     />
     <button
-      class="btn btn-outline-info"
+      class="btn btn-info"
       (click)="onExport()"
       aria-label="Export template JSON"
     >
-      {{ "export" | translate }}
+      {{ "Export" | translate }}
     </button>
     <button
-      class="btn btn-outline-dark"
+      class="btn btn-dark"
       (click)="toggleHelp()"
       aria-expanded="false"
     >
-      {{ "help" | translate }}
+      {{ "elp" | translate }}
     </button>
-    <span class="ms-auto text-muted" aria-live="polite">{{ status }}</span>
   </div>
   <div class="row">
     <div class="col-12 col-lg-6">
