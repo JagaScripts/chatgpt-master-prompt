@@ -128,6 +128,14 @@ export class TemplatesStore {
     this.updateCurrent((tpl) => ({ ...tpl, fences: !tpl.fences }));
   }
 
+  /** Clear values of all sections in the current template. */
+  clearAllValues(): void {
+    this.updateCurrent((tpl) => ({
+      ...tpl,
+      sections: tpl.sections.map((s) => ({ ...s, value: '' })),
+    }));
+  }
+
   /** Move last-edited section (or provided key) one position up. */
   moveSectionUp(key?: PromptSectionKey): void {
     this.moveSection(key ?? this.lastEditedSectionKeySignal(), -1);
