@@ -21,7 +21,13 @@ import { TemplatesStore } from '../../core/store/templates.store';
     <div class="card mb-3">
       <div class="card-header">{{ panelTitle }}</div>
       <div class="card-body" *ngIf="store.currentTemplate(); else loading">
-        <div *ngFor="let s of store.currentTemplate()!.sections" class="mb-3">
+        <div
+          *ngFor="
+            let s of store.currentTemplate()!.sections;
+            trackBy: trackByKey
+          "
+          class="mb-3"
+        >
           <div class="d-flex align-items-center gap-2 mb-1">
             <input
               type="checkbox"
@@ -106,6 +112,10 @@ export class SectionsListComponent implements OnInit {
 
   onEdit(key: string, value: string): void {
     this.store.setSectionValue(key as any, value);
+  }
+
+  trackByKey(_index: number, s: { key: string }): string {
+    return s?.key;
   }
 
   moveUp(key: string): void {
